@@ -13,7 +13,7 @@ public class AccessFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         if (request.getRequestURI().equals(request.getContextPath()+"/calculate") || request.getRequestURI().equals(request.getContextPath()+"/jsp/index.jsp")) {
-            if (request.getParameter("fromController") != null) {
+            if ((request.getParameter("fromController") != null) || ("true".equals(request.getParameter("areaClick")))) {
                 filterChain.doFilter(request, response);
             } else {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN);

@@ -2,9 +2,9 @@ const form = document.getElementById('mainForm');
 
 form.addEventListener('submit', function(event) {
 
-    const selectedXOptions = document.querySelectorAll('input[name="x-choose"]:checked');
+    const selectedXOptions = document.querySelectorAll('input[name="x"]:checked');
     const yValue = truncateNumber(document.getElementById("y-input").value, 10);
-    const rValue = document.querySelector('input[name="r-choose"]:checked').value;
+    const rValue = document.querySelector('input[name="r"]:checked').value;
 
     const xRegExp = /^(-5|-4|-3|-2|-1|0|1|2|3)$/;
     const yRegExp = /^(-?[0-2](\.\d+)?)$/;

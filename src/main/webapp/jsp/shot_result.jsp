@@ -45,7 +45,7 @@
         </div>
     </div>
     <div id="backLinkWrapper">
-        <a href="${pageContext.request.contextPath}/main" class="back_button">Обратно</a>
+        <a href="${pageContext.request.contextPath}/main" class="home-button">Go Home</a>
     </div>
     <%@include file="includes/_footer.jsp" %>
 </div>

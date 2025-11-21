@@ -72,7 +72,7 @@ function drawArea() {
 }
 
 canvas.addEventListener("click", function(event) {
-    const rValue = document.querySelector('input[name="r-choose"]:checked')?.value;
+    const rValue = document.querySelector('input[name="r"]:checked')?.value;
     if (!rValue) {
         showError();
         return;
@@ -93,21 +93,24 @@ canvas.addEventListener("click", function(event) {
     const x = ((clickX - centerX) / scale) * rValue;
     const y = ((centerY - clickY) / scale) * rValue;
 
-    const url = `/calculate?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}&r=${encodeURIComponent(rValue)}&areaClick=true`;
+    const contextPath = window.contextPath || '/lab2'; // fallback на /lab2
+    const url = `${contextPath}/calculate?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}&r=${encodeURIComponent(rValue)}&areaClick=true`;
+
+    console.log("Sending request to:", url);
     fetch(url)
         .then(response => response.json())
         .then(function(data) {
-            let result = data["result"] ? "Попадание" : "Промах";
+            let result = data[0]?.result ? "Попадание" : "Промах";
             let newRow =
                 `<tr>
-                            <td>${x}</td>
-                            <td>${parseFloat(y)}</td>
+                            <td>${x.toFixed(5)}</td>
+                            <td>${y.toFixed(5)}</td>
                             <td>${rValue}</td>
                             <td>${result}</td>
                         </tr>`;
             document.querySelector("#results tbody").insertAdjacentHTML('beforeend', newRow);
 
-            drawPoint(x, y, rValue, data["result"]);
+            drawPoint(x, y, rValue, data[0]?.result);
         })
         .catch(handleError);
 });
@@ -131,4 +134,3 @@ function drawPoint(x, y, r, hit) {
 
 window.drawPoint = drawPoint;
 window.drawArea = drawArea;
-window.normalizeX = normalizeX;
