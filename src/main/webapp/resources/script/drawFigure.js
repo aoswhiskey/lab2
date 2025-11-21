@@ -13,20 +13,20 @@ function drawArea() {
 
     // Прямоугольник
     ctx.fillStyle = "#4a4e69";
-    ctx.fillRect(canvas.width/2 - canvas.height/3, canvas.height/2, canvas.height/3, canvas.height/6);
+    ctx.fillRect(canvas.width/2 - canvas.height/6, canvas.height/2, canvas.height/6, canvas.height/3);
 
     // Окружность
     ctx.beginPath();
     ctx.moveTo(canvas.width/2, canvas.height/2);
-    ctx.arc(canvas.width/2, canvas.height/2, canvas.height/3, 0, 0.5 * Math.PI, false);
+    ctx.arc(canvas.width/2, canvas.height/2, canvas.height/3, Math.PI, 1.5 * Math.PI, false);
     ctx.closePath();
     ctx.fill();
 
     // Треугольник
     ctx.beginPath();
-    ctx.moveTo(canvas.width/2 + canvas.height/3, canvas.height/2);
+    ctx.moveTo(canvas.width/2 + canvas.height/6, canvas.height/2);
     ctx.lineTo(canvas.width/2, canvas.height/2);
-    ctx.lineTo(canvas.width/2, canvas.height/3);
+    ctx.lineTo(canvas.width/2, canvas.height/6);
     ctx.closePath();
     ctx.fill();
 
