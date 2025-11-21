@@ -73,29 +73,21 @@
                     Выберите радиус R
                 </p>
                 <div id="r-input">
-                    <div class="radio">
-                        <input type="radio" name="r" class="radio-r" value="1" id="radio-1">
-                        <label for="radio-1">1</label>
+                    <input type="hidden" id="selected-r" name="r" value="">
+                    <div class="r-button-option">
+                        <button type="button" class="r-button" data-value="1">1</button>
                     </div>
-
-                    <div class="radio">
-                        <input type="radio" name="r" class="radio-r" value="1.5" id="radio-2">
-                        <label for="radio-2">1.5</label>
+                    <div class="r-button-option">
+                        <button type="button" class="r-button" data-value="1.5">1.5</button>
                     </div>
-
-                    <div class="radio">
-                        <input type="radio" name="r" class="radio-r" value="2" id="radio-3">
-                        <label for="radio-3">2</label>
+                    <div class="r-button-option">
+                        <button type="button" class="r-button" data-value="2">2</button>
                     </div>
-
-                    <div class="radio">
-                        <input type="radio" name="r" class="radio-r" value="2.5" id="radio-4">
-                        <label for="radio-4">2.5</label>
+                    <div class="r-button-option">
+                        <button type="button" class="r-button" data-value="2.5">2.5</button>
                     </div>
-
-                    <div class="radio">
-                        <input type="radio" name="r" class="radio-r" value="3" id="radio-5">
-                        <label for="radio-5">3</label>
+                    <div class="r-button-option">
+                        <button type="button" class="r-button" data-value="3">3</button>
                     </div>
                 </div>
 
@@ -149,6 +141,7 @@
     window.contextPath = "${pageContext.request.contextPath}";
 </script>
 <script src="${pageContext.request.contextPath}/resources/script/validate.js"></script>
+<script src="${pageContext.request.contextPath}/resources/script/rHandler.js"></script>
 <script src="${pageContext.request.contextPath}/resources/script/drawFigure.js"></script>
 <script src="${pageContext.request.contextPath}/resources/script/formSubmitter.js"></script>
 </body>

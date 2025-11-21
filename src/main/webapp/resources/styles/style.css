@@ -94,35 +94,58 @@ body, html {
     justify-content: space-between;
 }
 
-.radio {
-    display: inline-grid;
-    margin: 1.5% 4%;
+/* Стили для кнопок выбора R */
+#r-input {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
 }
 
-.radio input {
-    display: none;
+.r-button-option {
+    display: inline-block;
 }
 
-.radio label {
+.r-button {
     cursor: pointer;
     display: inline-grid;
     justify-content: center;
     align-items: center;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     background-color: #4a4e69;
     color: #fff;
     border-radius: 50%;
     transition: background-color 0.3s, transform 0.3s;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: inherit;
 }
 
-.radio label:hover {
+.r-button:hover {
     background-color: #9a8c98;
-    transform: scale(1.03);
+    transform: scale(1.05);
 }
 
-.radio input:checked + label {
+.r-button.r-active {
     background-color: #9a8c98;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(154, 140, 152, 0.7);
+}
+
+/* Адаптивность для кнопок R */
+@media (max-width: 768px) {
+    .r-button {
+        width: 60px;
+        height: 60px;
+        font-size: 16px;
+    }
+
+    #r-input {
+        gap: 8px;
+    }
 }
 
 .checkbox {

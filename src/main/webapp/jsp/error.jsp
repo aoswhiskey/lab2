@@ -18,6 +18,7 @@
     <div id="message_window">
         <p>${applicationScope.current_error}</p>
     </div>
+    <a href="${pageContext.request.contextPath}/main" class="home-button">Go Home</a>
     <%@include file="includes/_footer.jsp" %>
 </div>
 </body>

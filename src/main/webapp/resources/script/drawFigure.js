@@ -73,7 +73,8 @@ function drawArea() {
 }
 
 canvas.addEventListener("click", function(event) {
-    const rValue = document.querySelector('input[name="r"]:checked')?.value;
+    // Получаем значение R из скрытого поля (новый способ)
+    const rValue = getCurrentR();
     if (!rValue) {
         showError();
         return;
