@@ -3,6 +3,7 @@
     padding: 0;
     margin: 0;
     border: none;
+    box-sizing: border-box;
 }
 
 /* Базовые настройки для страницы */
@@ -13,31 +14,35 @@ body, html {
     background: linear-gradient(to right bottom, #3a1c71, #d76d77, #ffaf7b) fixed;
 }
 
+/* ПЕРЕРАБОТАННАЯ СЕТКА */
 #gridContainer {
     display: grid;
     min-height: 100vh;
-    grid-template-rows: auto 1fr auto auto;
+    grid-template-rows: auto minmax(400px, 1fr) auto auto; /* Фиксируем высоту основной части */
+    grid-template-areas:
+        "header"
+        "main"
+        "data"
+        "footer";
     gap: 20px;
     padding: 1.1%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Стили для заголовка */
 #header {
-    display: grid;
+    grid-area: header;
     background-color: #4a4e69;
     padding: 0.8%;
     border-radius: 8px;
     justify-items: center;
     color: #fff;
     font-size: 18px;
-    box-shadow: inherit;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-family: serif, monospace;
     transition: transform 0.3s;
 }
 
 #header:hover {
-    transform: scale(1.01);
+    transform: scale(1.005);
 }
 
 #header-title {
@@ -48,11 +53,14 @@ body, html {
     justify-self: start;
 }
 
-/* Основной контент */
-#mainForm {
+/* ОСНОВНАЯ ЧАСТЬ - ФИКСИРОВАННАЯ ВЫСОТА */
+#maintable {
+    grid-area: main;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    height: 100%;
+    min-height: 400px;
 }
 
 /* Блок ввода */
@@ -61,23 +69,34 @@ body, html {
     padding: 2.5%;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     transition: transform 0.3s;
     color: #4a4e69;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 #input-block:hover {
-    transform: scale(1.02);
+    transform: scale(1.01);
 }
 
 #input-block p, #input-block label {
-    margin: 1% 0;
+    margin: 0.8% 0;
+}
+
+#mainForm {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
 }
 
 .radio {
     display: inline-grid;
-    margin: 2% 5%;
+    margin: 1.5% 4%;
 }
 
 .radio input {
@@ -89,8 +108,8 @@ body, html {
     display: inline-grid;
     justify-content: center;
     align-items: center;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     background-color: #4a4e69;
     color: #fff;
     border-radius: 50%;
@@ -99,7 +118,7 @@ body, html {
 
 .radio label:hover {
     background-color: #9a8c98;
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .radio input:checked + label {
@@ -108,7 +127,7 @@ body, html {
 
 .checkbox {
     display: inline-grid;
-    margin: 2.5% 1.125%;
+    margin: 2% 1%;
 }
 
 .checkbox input {
@@ -120,8 +139,8 @@ body, html {
     display: inline-grid;
     justify-content: center;
     align-items: center;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     background-color: #4a4e69;
     color: #fff;
     border-radius: 15%;
@@ -130,7 +149,7 @@ body, html {
 
 .checkbox label:hover {
     background-color: #9a8c98;
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .checkbox input:checked + label {
@@ -139,12 +158,12 @@ body, html {
 
 #y-input {
     width: 95%;
-    padding: 1.5%;
-    margin: 2% 0;
+    padding: 1.2%;
+    margin: 1.5% 0;
     border-radius: 5px;
     border: 1px solid #ccc;
     transition: border-color 0.3s;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 #y-input::placeholder {
@@ -157,17 +176,17 @@ body, html {
 }
 
 #y-input.error {
-    border-color: red; /* Цвет рамки при ошибке */
+    border-color: red;
 }
 
 #submit {
     height: auto;
     width: 100%;
-    padding: 5%;
-    margin: 2% 0;
+    padding: 4%;
+    margin: 1.5% 0;
     background-color: #4a4e69;
     color: #fff;
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
@@ -175,7 +194,7 @@ body, html {
 
 #submit:hover:not(:disabled) {
     background-color: #9a8c98;
-    transform: scale(1.025);
+    transform: scale(1.02);
 }
 
 #submit:hover:disabled {
@@ -193,10 +212,14 @@ div[class="error_text"] {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #graph:hover {
-    transform: scale(1.02);
+    transform: scale(1.01);
 }
 
 #frame {
@@ -206,14 +229,23 @@ div[class="error_text"] {
     border: 2px solid #4a4e69;
     width: 100%;
     height: 100%;
+    min-height: 350px;
 }
 
-/* Таблица данных */
+#canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* ТАБЛИЦА ДАННЫХ - ФИКСИРОВАННОЕ МЕСТО В СЕТКЕ */
 #datatable {
-    display: grid;
-    margin-top: 20px;
+    grid-area: data;
+    margin-top: 0;
+    max-height: 300px;
+    overflow-y: auto;
 }
-
 
 #data-block {
     background-color: #f2e9e4;
@@ -221,26 +253,34 @@ div[class="error_text"] {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s;
-}
-
-#data-block:hover {
-    transform: scale(1.01);
+    min-height: 150px;
 }
 
 #results {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
+    table-layout: fixed;
 }
 
 #results thead {
     background-color: #4a4e69;
     color: #fff;
+    position: sticky;
+    top: 0;
 }
 
 #results th, #results td {
-    padding: 10px;
+    padding: 8px;
     border: 1px solid #ccc;
+    word-wrap: break-word;
+}
+
+#results th {
+    position: sticky;
+    top: 0;
+    background-color: #4a4e69;
+    z-index: 1;
 }
 
 #results tbody tr:nth-child(even) {
@@ -253,6 +293,7 @@ div[class="error_text"] {
 
 /* Нижний колонтитул */
 #footer {
+    grid-area: footer;
     display: grid;
     justify-items: center;
     padding: 1%;
@@ -260,12 +301,12 @@ div[class="error_text"] {
     color: #fff;
     border-radius: 8px;
     font-family: serif;
-    box-shadow: inherit;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s;
 }
 
 #footer:hover {
-    transform: scale(1.01);
+    transform: scale(1.005);
 }
 
 #footer img {
@@ -273,10 +314,7 @@ div[class="error_text"] {
     height: auto;
 }
 
-
-
-
-/* Стили для окна сообщения об ошибке */
+/* Остальные стили для ошибок остаются без изменений */
 #message_window {
     max-width: 600px;
     margin: 50px auto;
@@ -306,7 +344,6 @@ div[class="error_text"] {
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
-/* Анимация появления */
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -318,19 +355,17 @@ div[class="error_text"] {
     }
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
     #message_window {
         margin: 30px 20px;
         padding: 20px;
     }
-    
+
     #message_window p {
         font-size: 1.1rem;
     }
 }
 
-/* Стили для страницы 404 */
 .error-404 {
     text-align: center;
     padding: 100px 20px;
@@ -356,7 +391,6 @@ div[class="error_text"] {
     margin-bottom: 30px;
 }
 
-/* Стили для страницы 403 */
 .error-403 {
     text-align: center;
     padding: 60px 20px;
@@ -384,7 +418,6 @@ div[class="error_text"] {
     border: 3px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Общие кнопки для обеих страниц */
 .home-button {
     display: inline-block;
     padding: 12px 25px;
@@ -406,23 +439,98 @@ div[class="error_text"] {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
     .error-404 h1,
     .error-403 h1 {
         font-size: 3rem;
     }
-    
+
     .error-403 .funny-message {
         font-size: 1.4rem;
     }
-    
+
     .error-gif {
         max-width: 250px;
     }
-    
+
     .error-404,
     .error-403 {
         padding: 40px 15px;
     }
+
+    /* Адаптивность для мобильных */
+    #maintable {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: auto;
+        gap: 15px;
+    }
+
+    #input-block, #graph {
+        height: 350px;
+    }
+
+    #gridContainer {
+        gap: 15px;
+        padding: 2%;
+    }
+
+    #datatable {
+        max-height: 250px;
+    }
 }
+
+
+/* СТИЛИ ДЛЯ СТРАНИЦЫ РЕЗУЛЬТАТОВ */
+body:has(#backLinkWrapper) #gridContainer {
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-areas:
+        "header"
+        "data"
+        "backLink"
+        "footer";
+    gap: 20px;
+}
+
+#backLinkWrapper {
+    grid-area: backLink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#backLinkWrapper .home-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #4a4e69;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid #4a4e69;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#backLinkWrapper .home-button:hover {
+    background-color: #9a8c98;
+    border-color: #9a8c98;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* На странице результатов таблица должна занимать больше места */
+body:has(#backLinkWrapper) #datatable {
+    grid-area: data;
+    max-height: none;
+    height: auto;
+    margin-top: 0;
+}
+
+body:has(#backLinkWrapper) #data-block {
+    min-height: 400px;
+    height: 100%;
+}
+

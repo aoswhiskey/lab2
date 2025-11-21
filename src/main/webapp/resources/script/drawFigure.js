@@ -5,6 +5,7 @@ canvas.width = frame.offsetWidth;
 canvas.height = frame.offsetHeight;
 
 drawArea(); // отрисовка фигуры при загрузке
+drawAll(); // отрисовка точек из таблицы
 
 // === Отрисовка фигуры ===
 function drawArea() {
@@ -94,9 +95,10 @@ canvas.addEventListener("click", function(event) {
     const y = ((centerY - clickY) / scale) * rValue;
 
     const contextPath = window.contextPath || '/lab2'; // fallback на /lab2
-    const url = `${contextPath}/calculate?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}&r=${encodeURIComponent(rValue)}&areaClick=true`;
+    const url = `${contextPath}/main?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}&r=${encodeURIComponent(rValue)}&areaClick=true`;
 
     console.log("Sending request to:", url);
+    hideError();
     fetch(url)
         .then(response => response.json())
         .then(function(data) {
@@ -132,5 +134,30 @@ function drawPoint(x, y, r, hit) {
     ctx.closePath();
 }
 
+function drawAll() {
+    document.querySelectorAll('#results tbody tr').forEach(row => {
+        const cells = row.querySelectorAll('td');
+
+        if (cells.length >= 4) {
+            const x = parseFloat(cells[0].textContent);
+            const y = parseFloat(cells[1].textContent);
+            const r = parseFloat(cells[2].textContent);
+            const resultText = cells[3].textContent.trim();
+
+            if (!isNaN(x) && !isNaN(y) && !isNaN(r)) {
+                const hit = resultText === "Попадание";
+
+                drawPoint(x, y, r, hit);
+            }
+        }
+    });
+}
+
+// Скрытие ошибки
+function hideError() {
+    document.querySelector(".error_text").style.display = "none";
+}
+
 window.drawPoint = drawPoint;
 window.drawArea = drawArea;
+window.drawAll = drawAll;
