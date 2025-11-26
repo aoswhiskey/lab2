@@ -39,3 +39,9 @@ out/artifacts/lab2_war_exploded
 /out/artifacts/lab2_war_exploded
 /out/artifacts/lab2_war_exploded
 /out/artifacts/lab2_war_exploded/jsp
+
+.gitignore
+.idea
+.mvn
+mvnw
+mvnw.cmd
